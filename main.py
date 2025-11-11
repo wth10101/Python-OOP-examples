@@ -3,7 +3,6 @@ class Book:
         self.title = title
         self.author = author
         self.isbn = isbn
-        self.type = type
 
     def display_info(self):
         print(f"\nTitle: **{self.title}**")
@@ -49,7 +48,7 @@ def main_run():
     
     book2 = Book("Pride and Prejudice", "Jane Austen", "978-0141439518")
     book3 = Book("Sapiens: A Brief History of Humankind", "Yuval Noah Harari", "978-0062316097")
-    
+
 
     # Adding the books to the library
     my_library.add_book(book1)
