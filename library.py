@@ -21,16 +21,15 @@ class Book(Item):
         super().__init__(title)
         self.author = author
         self.isbn = isbn
-        self.item_type = 'Book' # Set the specific item type
+        self.__item_type = 'Book' # Set the specific item type
 
     def display_info(self):
         # Override the superclass method to include book-specific details
         print(f"\nTitle: **{self.title}**")
-        print(f"Type: {self.item_type}")
+        print(f"Type: {self.__item_type}")
         print(f"Author: {self.author}")
         print(f"ISBN: {self.isbn}")
         print("-" * 20)
-
 
 class DVD(Item):
     def __init__(self, title, director, runtime):
@@ -39,12 +38,12 @@ class DVD(Item):
         self.director = director
         # Store runtime in minutes or a descriptive string
         self.runtime = runtime 
-        self.item_type = 'DVD' # Set the specific item type
+        self.__item_type = 'DVD' # Set the specific item type
 
     def display_info(self):
         # Override the superclass method to include DVD-specific details
         print(f"\nTitle: **{self.title}**")
-        print(f"Type: {self.item_type}")
+        print(f"Type: {self.__item_type}")
         print(f"Director: {self.director}")
         print(f"Runtime: {self.runtime}")
         print("-" * 20)
@@ -52,12 +51,12 @@ class DVD(Item):
 
 class Library: 
     def __init__(self):
-        self.catalog = []
+        self.__catalog = []
 
     def add_item(self, item): # Renamed to add_item for flexibility
         # Check if the item is an instance of the Item superclass or a subclass
         if isinstance(item, Item):
-            self.catalog.append(item)
+            self.__catalog.append(item)
             # Accessing item_type property from the Item class (or its subclasses)
             print(f"\n[SUCCESS] Added {item.item_type}: {item.title}") 
         else:
@@ -65,18 +64,18 @@ class Library:
 
     # Renamed to list_catalog for flexibility
     def list_catalog(self): 
-        if not self.catalog:
+        if not self.__catalog:
             print("\nThe library catalog is currently empty.")
             return
         print("\n*** Library Catalog Summary ***")
-        for index, item in enumerate(self.catalog, 1):
+        for index, item in enumerate(self.__catalog, 1):
             # Accessing item_type property
             print(f"{index}. ({item.item_type}) {item.title}")
         print("-------------------------------")
 
     # Renamed to display_catalog_details for clarity, implementation stays the same
     def display_catalog_details(self):
-        if not self.catalog:
+        if not self.__catalog:
             return
         
         print("\n*** Detailed Catalog View ***")
@@ -106,6 +105,10 @@ def main_run():
 
     # Listing the catalog (Summary View)
     my_library.list_catalog()
+
+    ##
+    ## THis would nolonger work as __catalog is now private
+    ## my_library.__catalog.clear()
 
     # Displaying details (Polymorphism)
     my_library.display_catalog_details()
